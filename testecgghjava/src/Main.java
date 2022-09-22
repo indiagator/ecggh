@@ -1,6 +1,4 @@
-import com.ecggh.model.PowerPlant;
-import com.ecggh.model.ThermalPP;
-import com.ecggh.model.User;
+import com.ecggh.model.*;
 
 public class Main
 {
@@ -15,7 +13,7 @@ public class Main
     User user; //scope is relevant to the whole class
 
 
-    public static void main(String[] args) // method
+    public static void main(String[] args) // method entry point
     {
 
         // sequence of statements
@@ -24,7 +22,10 @@ public class Main
 
         System.out.println("Hello ECGGH!");
 
-        User user1 = new User();
+        ResidentialUser residentialUser  = new ResidentialUser();
+        CommercialUser commercialUser = new CommercialUser();
+
+        User user1 = new User(commercialUser, residentialUser);
 
         PowerPlant powerPlant = new PowerPlant();
 
@@ -37,7 +38,11 @@ public class Main
 
     public void someMethod()
     {
-        user = new User();
+
+        CommercialUser commercialUser = new CommercialUser();
+        ResidentialUser residentialUser = new ResidentialUser();
+
+        user = new User(commercialUser, residentialUser); // dependency
 
     }
 
