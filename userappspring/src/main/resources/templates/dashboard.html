@@ -3,26 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>Dashboard</title>
-</head>
-<body>
 
-<h3 th:text=" 'Welcome ' + ${username}" />
+    <script type="text/javascript" th:src="@{/scripts/dashboard.js}"></script>
+
+</head>
+
+<body th:onload="init()">
 
 <div>
+    <form action="logout" method="get">
+        <input type="submit" value="LOGOUT">
+    </form>
+</div>
+
+
+<h3>Welcome <span id="username" th:text="${session.username}">No User Selected</span></h3>
+
+<div>
+
+    <h3>Update Your Profile</h3>
     <form action="updateprofile" method="post">
 
-        <label for="fullname">USERNAME:</label>
+        <label for="fullname">Fullname:</label>
         <input type="text" id="fullname" name="fullname" ><br>
 
-        <label for="phonenumber">PASSWORD:</label>
+        <label for="phonenumber">Phonenumber:</label>
         <input type="text" id="phonenumber" name="phonenumber" ><br><br>
 
-        <label for="type">PASSWORD:</label>
+        <label for="type">Type:</label>
         <input type="text" id="type" name="type" ><br><br>
 
         <input type="submit" value="SAVE">
-
     </form>
+
+</div>
+
+<div>
+    <h3>User Info</h3>
+
+    <h4>Fullname:<span id="fullnamevalue"></span></h4>
+    <h4>Phonenumber:<span id="phonenumbervalue"></span></h4>
+    <h4>Type:<span id="typevalue"></span></h4>
 </div>
 
 </body>
