@@ -39,31 +39,58 @@ public class MainController
     public String loginHandler(@RequestParam("username") String username, @RequestParam("password") String password, Model model, HttpSession session)
     {
 
-        Optional<Credential> userCredential =  credentialRepository.findById(username);
+        Optional<Userinfo> tempUserInfo;
+        Optional<Credential> userCredential = credentialRepository.findById(username);
 
-        if(userCredential.isPresent())
+        //****************************
+
+        if (userCredential.isPresent()) // if username is valid
         {
+            // username is valid code
+
             Credential tempCredential = userCredential.get();
-            if(tempCredential.getPassword().equals(password))
+            tempUserInfo = userinfoRepository.findById(tempCredential.getId());
+
+            if (tempCredential.getPassword().equals(password))
             {
-                // user authenticated
-                model.addAttribute("username",username);
-                //model.addAttribute("password",password);
                 session.setAttribute("username", username);
-                return "dashboard";
+
+                if (tempUserInfo.get().getType().equals("seller"))
+                {
+                    return "sellerdashboard";
+                }
+                else if (tempUserInfo.get().getType().equals("buyer"))
+                {
+                    return "buyerdashboard";
+                }
+                else if (tempUserInfo.get().getType().equals("admin"))
+                {
+                    return "dashboard";
+                }
+                else
+                {
+                    return "updateprofile";
+                }
+
+
             }
             else
             {
-                model.addAttribute("errMsg","Incorrect password");
-                return "landingpage";
-            }
-        }
-        else
-        {
-            model.addAttribute("errMsg","Invalid username");
-            return "landingpage";
-        }
 
+                model.addAttribute("errMsg", "Incorrect password");
+                return "landingpage";
+
+            }
+
+
+
+        }
+        else // usernamne is invalid
+        {
+            model.addAttribute("errMsg", "Invalid username");
+            return "landingpage";
+
+        }
 
     }
 
@@ -102,8 +129,25 @@ public class MainController
 
         userinfoRepository.save(newUserInfo);
 
-        return "dashboard";
+        if (newUserInfo.getType().equals("seller"))
+        {
+            return "sellerdashboard";
+        }
+        else if (newUserInfo.getType().equals("buyer"))
+        {
+            return "buyerdashboard";
+        }
+        else if (newUserInfo.getType().equals("admin"))
+        {
+            return "dashboard";
+        }
+        else
+        {
+            return "updateprofile";
+        }
     }
+
+
 
 
 

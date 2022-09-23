@@ -1,6 +1,6 @@
-function init() {
-
-    alert('scripts are working')
+function init()
+{
+    alert("scripts are working");
 
     var testHttpRequest;
 
@@ -57,6 +57,4 @@ function init() {
     //document.getElementById("show_profile_button").addEventListener("click",testButton);
 
     document.getElementById("show_profile_button").addEventListener("click",makeTestRequest);
-
 }
-
