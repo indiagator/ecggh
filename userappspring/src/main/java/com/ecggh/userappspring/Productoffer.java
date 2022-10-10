@@ -9,8 +9,11 @@ import javax.persistence.Table;
 @Table(name = "productoffer")
 public class Productoffer {
     @Id
-    @Column(name = "username", nullable = false, length = 50)
+    @Column(name = "offerid", nullable = false, length = 20)
     private String id;
+
+    @Column(name = "username", nullable = false, length = 50)
+    private String username;
 
     @Column(name = "hscode", nullable = false, length = 20)
     private String hscode;
@@ -21,12 +24,23 @@ public class Productoffer {
     @Column(name = "price", nullable = false)
     private Integer price;
 
+    @Column(name = "currency", nullable = false, length = 10)
+    private String currency;
+
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getHscode() {
@@ -51,6 +65,14 @@ public class Productoffer {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public String getCurrency() {
+        return currency;
+    }
+
+    public void setCurrency(String currency) {
+        this.currency = currency;
     }
 
 }

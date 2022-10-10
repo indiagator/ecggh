@@ -1,11 +1,14 @@
 package com.ecggh.testservice4fetchuserinfo;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @SpringBootApplication
@@ -14,6 +17,8 @@ import java.util.Optional;
 @RequestMapping("api/1.1")
 @CrossOrigin
 public class TestService4FetchuserinfoApplication {
+    
+    Logger logger = LoggerFactory.getLogger(TestService4FetchuserinfoApplication.class);
 
     @Autowired
     public UserinfoRepository userinfoRepository;
@@ -57,6 +62,14 @@ public class TestService4FetchuserinfoApplication {
         Message msg = new Message();
         msg.setMsgString("new product offer saved");
         return msg;
+    }
+
+    @GetMapping("/getAllOffers")
+    public List<Productoffer> fetchAllProductOffers()
+    {
+        logger.info("all prduct offers were fetched");
+        return productofferRepositoryJpa.findAll();
+
     }
 
 }

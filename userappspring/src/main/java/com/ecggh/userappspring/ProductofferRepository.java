@@ -1,6 +1,6 @@
 package com.ecggh.userappspring;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ProductofferRepository extends CrudRepository<Productoffer, String> {
+public interface ProductofferRepository extends JpaRepository<Productoffer, String> {
 }
